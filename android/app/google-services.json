@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "457770686590",
+    "project_id": "profile-5d517",
+    "storage_bucket": "profile-5d517.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457770686590:android:ee876f435ba9b987a4e02f",
+        "android_client_info": {
+          "package_name": "com.example.curriculum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457770686590-3f2p8sgplo0p6kp87kd9u1he0ft9q0d2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD98qFBTsVYYe_g3X6VT2IcUmmHlyNL0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457770686590-3f2p8sgplo0p6kp87kd9u1he0ft9q0d2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
