@@ -84,7 +84,7 @@ class SpaceScreen extends StatelessWidget {
                       duration: const Duration(seconds: 3),
                       delay: const Duration(seconds: 1, milliseconds: 800))),
               Align(
-                alignment: const Alignment(.6, .6),
+                alignment: const Alignment(.4, 0),
                 child: Transform.rotate(
                   angle: -math.pi / 8,
                   child: Image.network(
@@ -107,23 +107,21 @@ class SpaceScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Center(
-                          child: AutoSizeText(
-                            "About me and my work",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold),
-                          )
-                              .animate()
-                              .fadeIn(
-                                  duration: const Duration(seconds: 2),
-                                  delay: const Duration(seconds: 1))
-                              .slideY(
-                                  begin: 0.5,
-                                  duration: const Duration(milliseconds: 500)),
-                        ),
+                        AutoSizeText(
+                          "About me and my work",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        )
+                            .animate()
+                            .fadeIn(
+                                duration: const Duration(seconds: 2),
+                                delay: const Duration(seconds: 1))
+                            .slideY(
+                                begin: 0.5,
+                                duration: const Duration(milliseconds: 500)),
                         const SizedBox(
                           height: 8,
                         ),

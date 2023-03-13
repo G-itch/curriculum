@@ -1,3 +1,4 @@
+import 'package:curriculum/history.dart';
 import 'package:curriculum/skills.dart';
 import 'package:curriculum/space.dart';
 import 'package:flutter/gestures.dart';
@@ -66,19 +67,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: PageView(
-        scrollBehavior: MaterialScrollBehavior().copyWith(
-          dragDevices: {
-            PointerDeviceKind.mouse,
-            PointerDeviceKind.touch,
-            PointerDeviceKind.stylus,
-            PointerDeviceKind.unknown
-          },
-        ),
+        // scrollBehavior: MaterialScrollBehavior().copyWith(
+        //   dragDevices: {
+        //     PointerDeviceKind.mouse,
+        //     PointerDeviceKind.touch,
+        //     PointerDeviceKind.stylus,
+        //     PointerDeviceKind.unknown
+        //   },
+        // ),
         scrollDirection: Axis.vertical,
         pageSnapping: false,
         children: [
           Center(child: SpaceScreen()),
           Center(child: SkillPage()),
+          Center(
+            child: HistoryScreen(),
+          )
         ],
       ),
     );

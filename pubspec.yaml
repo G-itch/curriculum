@@ -51,6 +51,7 @@ dependencies:
   flutter_animate: ^4.1.0
   ditredi: ^1.0.3
   model_viewer_plus: ^1.5.0
+  opscroll_web: ^0.3.2
 
 dev_dependencies:
   flutter_test:
@@ -94,7 +95,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+      - family: nasalization
+        fonts:
+          - asset: fonts/nasalization-rg.ttf 
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

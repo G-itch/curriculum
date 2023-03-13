@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:curriculum/gesture_skills.dart';
+import 'package:curriculum/listgestures.dart';
 import 'package:curriculum/skill_%20indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -19,6 +21,10 @@ class SkillPage extends StatefulWidget {
 }
 
 class _SkillPageState extends State<SkillPage> {
+  int indexskill = 0;
+  int? lastindex;
+  Color skillscolor = Colors.white;
+  String stack = "";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,6 +54,14 @@ class _SkillPageState extends State<SkillPage> {
             ).animate().fadeIn(
                 duration: const Duration(seconds: 3),
                 delay: const Duration(seconds: 2, milliseconds: 500))),
+        Align(
+          alignment: Alignment(0, -.7),
+          child: Image.network(
+            "https://storage.googleapis.com/profile-5d517.appspot.com/chair.gif",
+            height: 300,
+            width: 190,
+          ),
+        ),
         Center(
           child: SingleChildScrollView(
             child: ResponsiveRowColumn(
@@ -61,42 +75,63 @@ class _SkillPageState extends State<SkillPage> {
                 children: [
                   ResponsiveRowColumnItem(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Container(
-                                  height: 200,
-                                  width: 400,
-                                  child: const SkillsRadar())
-                              .animate()
-                              .fadeIn(
-                                  duration: const Duration(seconds: 3),
-                                  delay: const Duration(
-                                      seconds: 2, milliseconds: 500)),
-                        )
-                        // SvgPicture.asset(
-                        //   "flutter-svgrepo-com.svg",
-                        //   width: 140,
-                        //   height: 140,
-                        // ),
-                        // SizedBox(
-                        //   height: 20,
-                        // ),
-                        // ClipRRect(
-                        //   borderRadius: BorderRadius.circular(30),
-                        //   child: Container(
-                        //     width: 250,
-                        //     height: 8,
-                        //     child: LinearProgressIndicator(
-                        //       value: 0.8,
-                        //       backgroundColor:
-                        //           Color.fromARGB(79, 255, 255, 255),
-                        //       color: Color.fromARGB(255, 65, 209, 253),
-                        //     ),
-                        //   ),
+                            child: Container(
+                                height: 200,
+                                width: 300,
+                                child: SkillsRadar(
+                                  radarcolor: skillscolor,
+                                  indexskill: indexskill,
+                                  stack: stack,
+                                )
+                                //
+                                )),
+                        // .animate(
+                        //   onPlay: (controller) => controller.repeat(),
                         // )
+                        // .shimmer(duration: Duration(seconds: 3))
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                width: 20,
+                              );
+                            },
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: Listskills().skills(skillscolor).length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  if (indexskill != index + 1) {
+                                    setState(() {
+                                      skillscolor = colors[index];
+                                      indexskill = index + 1;
+                                      stack = stacks[index];
+                                      lastindex = indexskill;
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Listskills()
+                                        .skills(skillscolor)[index]),
+                              );
+                            },
+                          ),
+                        )
                       ],
-                    ),
+                    ).animate().fadeIn(
+                        duration: const Duration(seconds: 3),
+                        delay: const Duration(seconds: 2, milliseconds: 500)),
                   ),
                   const ResponsiveRowColumnItem(
                       child: SizedBox(
@@ -184,3 +219,13 @@ class _SkillPageState extends State<SkillPage> {
     );
   }
 }
+
+List<Color> colors = [
+  Color.fromARGB(255, 33, 72, 243),
+  Color.fromARGB(255, 54, 243, 33),
+  Color.fromARGB(255, 229, 243, 33),
+  Color.fromARGB(255, 243, 33, 33),
+  Color.fromARGB(255, 121, 33, 243),
+];
+
+List<String> stacks = ["Flutter", "Firebase", "Python", "AWS", "Javascript"];

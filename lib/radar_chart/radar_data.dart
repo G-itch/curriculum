@@ -4,25 +4,21 @@ import 'radar_data_class.dart';
 
 class RadarData {
   List<RadarClass> radardata = [
+    RadarClass(values: []),
     RadarClass(
-        values: [0.2, 0.4, 0.6, 0.8, 1],
-        bordercolor: Colors.red,
-        fillcolor: Colors.transparent),
+      values: [1, 0.7, 0.6, 0.8, 0.7],
+    ),
     RadarClass(
-        values: [0.2, 0.4, 0.6, 0.8, 1],
-        bordercolor: Colors.red,
-        fillcolor: Colors.transparent),
+      values: [0.9, 0.7, 1, 0.8, 0.5],
+    ),
     RadarClass(
-        values: [0.2, 0.4, 0.6, 0.8, 1],
-        bordercolor: Colors.red,
-        fillcolor: Colors.transparent),
+      values: [0.7, 0.8, 0.6, 0.7, 1],
+    ),
     RadarClass(
-        values: [0.2, 0.8, 0.6, 0.9, 1],
-        bordercolor: Colors.red,
-        fillcolor: Colors.transparent),
+      values: [0.6, 0.6, 1, 0.4, 0.7],
+    ),
     RadarClass(
-        values: [0.2, 0.4, 0.6, 0.8, 1],
-        bordercolor: Colors.yellow,
-        fillcolor: Colors.transparent),
+      values: [0.3, 0.6, 0.8, 0.4, 0.2],
+    ),
   ];
 }
