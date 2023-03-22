@@ -1,13 +1,15 @@
+import 'dart:async';
+
 import 'package:curriculum/history.dart';
 import 'package:curriculum/skills.dart';
 import 'package:curriculum/space.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 void main() {
@@ -18,8 +20,11 @@ void main() {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 }
 
+bool _time = true;
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -62,28 +67,65 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late PageController _pageController;
+  bool scroll = true;
+  @override
+  void initState() {
+    _pageController = PageController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // _pageController.animateTo(_pageController.offset,
+    //     duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
     return Scaffold(
       backgroundColor: Colors.black,
-      body: PageView(
-        // scrollBehavior: MaterialScrollBehavior().copyWith(
-        //   dragDevices: {
-        //     PointerDeviceKind.mouse,
-        //     PointerDeviceKind.touch,
-        //     PointerDeviceKind.stylus,
-        //     PointerDeviceKind.unknown
-        //   },
-        // ),
-        scrollDirection: Axis.vertical,
-        pageSnapping: false,
-        children: [
-          Center(child: SpaceScreen()),
-          Center(child: SkillPage()),
-          Center(
-            child: HistoryScreen(),
-          )
-        ],
+      body: Listener(
+        onPointerSignal: (event) {
+          if (scroll) {
+            setState(() {
+              scroll = false;
+            });
+            Timer(Duration(seconds: 3), () {
+              setState(() {
+                scroll = true;
+              });
+            });
+            if (event is PointerScrollEvent) {
+              if (event.scrollDelta.dy >= 0) {
+                _pageController.nextPage(
+                    duration: const Duration(milliseconds: 1200),
+                    curve: Curves.easeInOut);
+              } else {
+                _pageController.previousPage(
+                    duration: const Duration(milliseconds: 1200),
+                    curve: Curves.easeInOut);
+              }
+            }
+          }
+        },
+        child: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          // // scrollBehavior: MaterialScrollBehavior().copyWith(
+          // //   dragDevices: {
+          // //     PointerDeviceKind.mouse,
+          // //     PointerDeviceKind.touch,
+          // //     PointerDeviceKind.stylus,
+          // //     PointerDeviceKind.unknown
+          // //   },
+          // // ),
+          scrollDirection: Axis.vertical,
+          // pageSnapping: false,
+          children: [
+            Center(child: SpaceScreen()),
+            Center(child: SkillPage()),
+            Center(
+              child: HistoryScreen(),
+            )
+          ],
+        ),
       ),
     );
   }

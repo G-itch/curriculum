@@ -28,15 +28,22 @@ class _SkillPageState extends State<SkillPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5), BlendMode.dstATop),
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                "https://storage.googleapis.com/profile-5d517.appspot.com/stars.png",
+              )),
           gradient: LinearGradient(
               begin: Alignment(-5.5, -5.5),
               end: Alignment(6.5, 6.5),
               colors: [
-            Color.fromARGB(255, 11, 24, 61),
-            Color.fromARGB(255, 0, 0, 0),
-            Color.fromARGB(255, 194, 118, 31)
-          ])),
+                Color.fromARGB(255, 11, 24, 61),
+                Color.fromARGB(255, 0, 0, 0),
+                Color.fromARGB(255, 194, 118, 31)
+              ])),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Stack(children: [
@@ -55,12 +62,14 @@ class _SkillPageState extends State<SkillPage> {
                 duration: const Duration(seconds: 3),
                 delay: const Duration(seconds: 2, milliseconds: 500))),
         Align(
-          alignment: Alignment(0, -.7),
+          alignment: Alignment(0, -.1),
           child: Image.network(
             "https://storage.googleapis.com/profile-5d517.appspot.com/chair.gif",
             height: 300,
             width: 190,
-          ),
+          ).animate().fadeIn(
+              duration: const Duration(seconds: 3),
+              delay: const Duration(seconds: 1, milliseconds: 700)),
         ),
         Center(
           child: SingleChildScrollView(

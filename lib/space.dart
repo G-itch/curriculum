@@ -9,22 +9,34 @@ import 'dart:math' as math;
 import 'package:ditredi/ditredi.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 
-class SpaceScreen extends StatelessWidget {
+class SpaceScreen extends StatefulWidget {
   const SpaceScreen({super.key});
 
+  @override
+  State<SpaceScreen> createState() => _SpaceScreenState();
+}
+
+class _SpaceScreenState extends State<SpaceScreen> {
   @override
   Widget build(BuildContext context) {
     bool already = false;
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5), BlendMode.dstATop),
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                "https://storage.googleapis.com/profile-5d517.appspot.com/stars.png",
+              )),
           gradient: LinearGradient(
               begin: Alignment(6, -6),
               end: Alignment(-5, 5),
               colors: [
-            Color.fromARGB(255, 202, 19, 19),
-            Color.fromARGB(255, 0, 0, 0),
-            Color.fromARGB(255, 11, 24, 61)
-          ])),
+                Color.fromARGB(255, 202, 19, 19),
+                Color.fromARGB(255, 0, 0, 0),
+                Color.fromARGB(255, 11, 24, 61)
+              ])),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Stack(
@@ -128,7 +140,7 @@ class SpaceScreen extends StatelessWidget {
                         Container(
                           width: 350,
                           child: AutoSizeText(
-                            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+                            " Grettings! I am a FullStack Enginner with 3 years of experience working mostly in Web/app deve lopment, automation and Data Science. Throughout my career, I have had the opportunity to work on a variety of projects that have challenged me and allowed me to grow as a programmer.",
                             style: GoogleFonts.poppins(
                                 color: Colors.grey,
                                 fontSize: ResponsiveWrapper.of(context)
@@ -148,7 +160,7 @@ class SpaceScreen extends StatelessWidget {
                         Container(
                             width: 350,
                             child: AutoSizeText(
-                              " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+                              " My approach to work is to focus on creating high-quality, efficient, and maintainable code at the fast time possible. I believe that it is essential to have a thorough understanding of the business needs and objectives behind a project to create software that truly meets each need.",
                               style: GoogleFonts.poppins(
                                   color: Colors.grey,
                                   fontSize: ResponsiveWrapper.of(context)

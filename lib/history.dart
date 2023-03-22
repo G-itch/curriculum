@@ -17,23 +17,44 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> {
   int d3d = 0;
+  bool autoplay = true;
+  bool visible = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5), BlendMode.dstATop),
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                "https://storage.googleapis.com/profile-5d517.appspot.com/stars.png",
+              )),
           gradient: LinearGradient(
               begin: Alignment(6.5, -6.5),
               end: Alignment(-5.5, 5.5),
               colors: [
-            Color.fromARGB(255, 194, 118, 31),
-            Color.fromARGB(255, 0, 0, 0),
-            Color.fromARGB(255, 61, 11, 55),
-          ])),
+                Color.fromARGB(255, 194, 118, 31),
+                Color.fromARGB(255, 0, 0, 0),
+                Color.fromARGB(255, 61, 11, 55),
+              ])),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
           Center(
+              child: SingleChildScrollView(
             child: ResponsiveRowColumn(
                 rowCrossAxisAlignment: CrossAxisAlignment.center,
                 rowMainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,8 +67,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   ResponsiveRowColumnItem(
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: SingleChildScrollView(
-                          child: Column(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           AutoSizeText(
                             "The journey",
@@ -67,212 +88,194 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           const SizedBox(
                             height: 8,
                           ),
-                          Container(
-                            width: 400,
-                            child: CarouselSlider(
-                                items: texts,
-                                options: CarouselOptions(
-                                    autoPlayInterval: Duration(seconds: 8),
-                                    autoPlayAnimationDuration:
-                                        Duration(seconds: 1, milliseconds: 800),
-                                    autoPlayCurve: Curves.easeInOut,
-                                    scrollDirection: Axis.vertical,
-                                    height: 400,
-                                    viewportFraction: 1,
-                                    autoPlay: true)),
+                          AnimatedContainer(
+                            width: 350,
+                            duration: Duration(seconds: 1),
+                            height: 2,
+                            color: autoplay ? Colors.white : Colors.transparent,
+                            curve: Curves.easeInOut,
+                          )
+                              .animate()
+                              .fadeIn(
+                                  duration: const Duration(seconds: 4),
+                                  delay: const Duration(seconds: 1))
+                              .slideY(duration: const Duration(seconds: 2)),
+                          GestureDetector(
+                            onTap: () {
+                              print("tap");
+                              if (autoplay == true) {
+                                setState(() {
+                                  autoplay = false;
+                                });
+                              } else {
+                                setState(() {
+                                  autoplay = true;
+                                });
+                              }
+                            },
+                            onHorizontalDragEnd: (details) {
+                              print("hori");
+                              if (autoplay == true) {
+                                setState(() {
+                                  autoplay = false;
+                                });
+                              } else {
+                                setState(() {
+                                  autoplay = true;
+                                });
+                              }
+                            },
+                            onVerticalDragEnd: (details) {
+                              print("vert");
+                              if (autoplay == true) {
+                                setState(() {
+                                  autoplay = false;
+                                });
+                              } else {
+                                setState(() {
+                                  autoplay = true;
+                                });
+                              }
+                            },
+                            child: Container(
+                              width: 350,
+                              child: AbsorbPointer(
+                                child: CarouselSlider(
+                                    items: texts
+                                        .map(
+                                          (e) => Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 350,
+                                                child: AutoSizeText(
+                                                  e[0],
+                                                  style: GoogleFonts.poppins(
+                                                      color: Colors.grey,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                  textAlign: TextAlign.justify,
+                                                ).animate().fadeIn(
+                                                    duration: const Duration(
+                                                        seconds: 4),
+                                                    delay: const Duration(
+                                                        seconds: 1,
+                                                        milliseconds: 400)),
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              Container(
+                                                  width: 350,
+                                                  child: AutoSizeText(
+                                                    e[1],
+                                                    style: GoogleFonts.poppins(
+                                                        color: Colors.grey,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                  ).animate().fadeIn(
+                                                      duration: const Duration(
+                                                          seconds: 4),
+                                                      delay: const Duration(
+                                                          seconds: 1,
+                                                          milliseconds: 800))),
+                                            ],
+                                          ),
+                                        )
+                                        .toList(),
+                                    options: CarouselOptions(
+                                        onPageChanged: (index, reason) async {
+                                          print(index);
+                                          if (mounted) {
+                                            setState(() {
+                                              visible = false;
+                                            });
+                                          }
+                                          await Future.delayed(
+                                              Duration(seconds: 2));
+                                          if (mounted) {
+                                            setState(() {
+                                              d3d = index;
+                                            });
+                                          }
+                                          await Future.delayed(
+                                              Duration(milliseconds: 500));
+                                          if (mounted) {
+                                            setState(() {
+                                              visible = true;
+                                            });
+                                          }
+                                        },
+                                        autoPlayInterval: Duration(seconds: 12),
+                                        autoPlayAnimationDuration: Duration(
+                                            seconds: 1, milliseconds: 800),
+                                        autoPlayCurve: Curves.easeInOut,
+                                        scrollDirection: Axis.vertical,
+                                        height: 380,
+                                        viewportFraction: 1,
+                                        autoPlay: autoplay)),
+                              ),
+                            ),
                           ),
                         ],
-                      )
-                          // Column(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: [
-                          //     AutoSizeText(
-                          //       "The journey",
-                          //       textAlign: TextAlign.center,
-                          //       style: GoogleFonts.montserrat(
-                          //           color: Colors.white,
-                          //           fontSize: 30,
-                          //           fontWeight: FontWeight.bold),
-                          //     )
-                          //         .animate()
-                          //         .fadeIn(
-                          //             duration: const Duration(seconds: 2),
-                          //             delay: const Duration(seconds: 1))
-                          //         .slideY(
-                          //             begin: 0.5,
-                          //             duration:
-                          //                 const Duration(milliseconds: 500)),
-                          //     const SizedBox(
-                          //       height: 8,
-                          //     ),
-                          //     Container(
-                          //       width: 200,
-                          //       height: 100,
-                          //       child: Timeline.tileBuilder(
-                          //         builder: TimelineTileBuilder.fromStyle(
-                          //           contentsAlign: ContentsAlign.alternating,
-                          //           contentsBuilder: (context, index) => Padding(
-                          //             padding: const EdgeInsets.all(24.0),
-                          //             child: Text('Timeline Event $index'),
-                          //           ),
-                          //           itemCount: 10,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     Container(
-                          //       width: 350,
-                          //       child: AutoSizeText(
-                          //         " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-                          //         style: GoogleFonts.poppins(
-                          //             color: Colors.grey,
-                          //             fontSize: ResponsiveWrapper.of(context)
-                          //                     .isSmallerThan(DESKTOP)
-                          //                 ? 18
-                          //                 : 16,
-                          //             fontWeight: FontWeight.w600),
-                          //         textAlign: TextAlign.justify,
-                          //       ).animate().fadeIn(
-                          //           duration: const Duration(seconds: 2),
-                          //           delay: const Duration(
-                          //               seconds: 1, milliseconds: 400)),
-                          //     ),
-                          //     const SizedBox(
-                          //       height: 8,
-                          //     ),
-                          //     Container(
-                          //         width: 350,
-                          //         child: AutoSizeText(
-                          //           " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-                          //           style: GoogleFonts.poppins(
-                          //               color: Colors.grey,
-                          //               fontSize: ResponsiveWrapper.of(context)
-                          //                       .isSmallerThan(DESKTOP)
-                          //                   ? 18
-                          //                   : 16,
-                          //               fontWeight: FontWeight.w600),
-                          //           textAlign: TextAlign.justify,
-                          //         ).animate().fadeIn(
-                          //             duration: const Duration(seconds: 2),
-                          //             delay: const Duration(
-                          //                 seconds: 1, milliseconds: 800)))
-                          //   ],
-                          // ),
-                          ),
+                      ),
                     ),
                   ),
                   ResponsiveRowColumnItem(
-                    child: Container(
-                      height: 300,
-                      width: 340,
-                      child: ModelViewer(
-                        autoRotate: true,
-                        ar: true,
-                        disableZoom: true,
-                        src: the3d[d3d],
-                      ),
+                      child: AnimatedOpacity(
+                    opacity: visible ? 1 : 0,
+                    duration: Duration(seconds: 2),
+                    curve: Curves.easeInOut,
+                    child: IndexedStack(
+                      index: d3d,
+                      children: the3d.map((e) {
+                        return Container(
+                          height: 300,
+                          width: 300,
+                          child: ModelViewer(
+                            autoRotate: true,
+                            ar: true,
+                            disableZoom: true,
+                            src: e,
+                          ),
+                        );
+                      }).toList(),
                     ).animate().fadeIn(
-                        duration: const Duration(seconds: 7),
-                        delay: const Duration(seconds: 2, milliseconds: 200)),
-                  )
+                        duration: const Duration(seconds: 4),
+                        delay: const Duration(seconds: 2, milliseconds: 800)),
+                  ))
                 ]),
-          ),
+          )),
         ],
       ),
     );
   }
 }
 
-List<Widget> texts = [
-  Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Container(
-        width: 350,
-        child: AutoSizeText(
-          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-          style: GoogleFonts.poppins(
-              color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
-          textAlign: TextAlign.justify,
-        ).animate().fadeIn(
-            duration: const Duration(seconds: 2),
-            delay: const Duration(seconds: 1, milliseconds: 400)),
-      ),
-      const SizedBox(
-        height: 8,
-      ),
-      Container(
-          width: 350,
-          child: AutoSizeText(
-            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-            style: GoogleFonts.poppins(
-                color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
-            textAlign: TextAlign.justify,
-          ).animate().fadeIn(
-              duration: const Duration(seconds: 2),
-              delay: const Duration(seconds: 1, milliseconds: 800))),
-    ],
-  ),
-  Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Container(
-        width: 350,
-        child: AutoSizeText(
-          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-          style: GoogleFonts.poppins(
-              color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
-          textAlign: TextAlign.justify,
-        ).animate().fadeIn(
-            duration: const Duration(seconds: 2),
-            delay: const Duration(seconds: 1, milliseconds: 400)),
-      ),
-      const SizedBox(
-        height: 8,
-      ),
-      Container(
-          width: 350,
-          child: AutoSizeText(
-            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-            style: GoogleFonts.poppins(
-                color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
-            textAlign: TextAlign.justify,
-          ).animate().fadeIn(
-              duration: const Duration(seconds: 2),
-              delay: const Duration(seconds: 1, milliseconds: 800))),
-    ],
-  ),
-  Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Container(
-        width: 350,
-        child: AutoSizeText(
-          " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-          style: GoogleFonts.poppins(
-              color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
-          textAlign: TextAlign.justify,
-        ).animate().fadeIn(
-            duration: const Duration(seconds: 2),
-            delay: const Duration(seconds: 1, milliseconds: 400)),
-      ),
-      const SizedBox(
-        height: 8,
-      ),
-      Container(
-          width: 350,
-          child: AutoSizeText(
-            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-            style: GoogleFonts.poppins(
-                color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w600),
-            textAlign: TextAlign.justify,
-          ).animate().fadeIn(
-              duration: const Duration(seconds: 2),
-              delay: const Duration(seconds: 1, milliseconds: 800))),
-    ],
-  ),
+List<List<String>> texts = [
+  [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+  ],
+  [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+  ],
+  [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+  ]
 ];
-List<String> the3d = ["assets/phoneblack.glb", "assets/macbl.glb"];
+
+List<String> the3d = [
+  "assets/macbl.glb",
+  "assets/phoneblack.glb",
+  "assets/phone.glb",
+];

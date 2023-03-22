@@ -6,7 +6,7 @@ class RadarData {
   List<RadarClass> radardata = [
     RadarClass(values: []),
     RadarClass(
-      values: [1, 0.7, 0.6, 0.8, 0.7],
+      values: [1, 0.7, 0.8, 0.8, 0.7],
     ),
     RadarClass(
       values: [0.9, 0.7, 1, 0.8, 0.5],

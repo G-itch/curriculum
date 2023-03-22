@@ -47,11 +47,11 @@ dependencies:
   flutter_svg: ^1.1.6
   carousel_slider: ^4.2.1
   fl_chart: ^0.61.0
-  web_smooth_scroll: ^1.1.0
   flutter_animate: ^4.1.0
   ditredi: ^1.0.3
   model_viewer_plus: ^1.5.0
   opscroll_web: ^0.3.2
+  universal_io: ^2.2.0
 
 dev_dependencies:
   flutter_test:
