@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:curriculum/contact.dart';
 import 'package:curriculum/history.dart';
 import 'package:curriculum/skills.dart';
 import 'package:curriculum/space.dart';
@@ -123,6 +124,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Center(child: SkillPage()),
             Center(
               child: HistoryScreen(),
+            ),
+            Center(
+              child: ContactScreen(),
             )
           ],
         ),
