@@ -221,7 +221,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           width: 300,
                           child: ModelViewer(
                             autoRotate: true,
-                            ar: true,
                             disableZoom: true,
                             src: e,
                           ),
