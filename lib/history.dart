@@ -166,26 +166,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                         seconds: 1,
                                                         milliseconds: 400)),
                                               ),
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                              Container(
-                                                  width: 350,
-                                                  child: AutoSizeText(
-                                                    e[1],
-                                                    style: GoogleFonts.poppins(
-                                                        color: Colors.grey,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                    textAlign:
-                                                        TextAlign.justify,
-                                                  ).animate().fadeIn(
-                                                      duration: const Duration(
-                                                          seconds: 4),
-                                                      delay: const Duration(
-                                                          seconds: 1,
-                                                          milliseconds: 800))),
                                             ],
                                           ),
                                         )
@@ -218,7 +198,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                             seconds: 1, milliseconds: 800),
                                         autoPlayCurve: Curves.easeInOut,
                                         scrollDirection: Axis.vertical,
-                                        height: 380,
+                                        height: 250,
                                         viewportFraction: 1,
                                         autoPlay: autoplay)),
                               ),
@@ -261,21 +241,26 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
 List<List<String>> texts = [
   [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+    " I've always enjoyed creating, and it was in elementary school that I discovered that my passion was programming, the act of studying, practicing, making mistakes, and reproducing until you're satisfied. Through self-study and constant practice, I honed my programming skills and immersed myself in various languages ​​and technologies. ",
+    " With each completed project, I felt a sense of accomplishment and satisfaction, knowing that I created something from scratch and that my code is in action, doing its job. The passion for programming continues to grow with each challenge faced and with each new project I tackle.",
+  ],
+  [
+    " Every time I study or write lines of code, I feel a unique excitement and sense of accomplishment. From basic algorithms to complex systems, every step of the programming process brings me joy and satisfaction. I love taking on challenges, solving problems and discovering creative solutions to turn ideas into reality through the power of programming.",
+    " Also, every new method or technique I learn fascinates me and inspires me to keep learning and improving my skills. The ever-evolving nature of programming motivates me to stay up-to-date with the latest trends and technologies.",
+  ],
+  [
+    " With each completed project, I felt a sense of accomplishment and satisfaction, knowing that I created something from scratch and that my code is in action, doing its job. The passion for programming continues to grow with each challenge faced and with each new project I tackle. For sure it's a rewarding experience.",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
   ],
   [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
-  ],
-  [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+    " Also, every new method or technique I learn fascinates me and inspires me to keep learning and improving my skills. The ever-evolving nature of programming motivates me to stay up-to-date with the latest trends and technologies. I value the moments when I can dive into a new project, explore different approaches and test new ideas.",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
   ]
 ];
 
 List<String> the3d = [
+  "assets/book.glb",
   "assets/macbl.glb",
+  "assets/dreamland.glb",
   "assets/phoneblack.glb",
-  "assets/phone.glb",
 ];

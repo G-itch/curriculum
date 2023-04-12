@@ -140,7 +140,7 @@ class _SpaceScreenState extends State<SpaceScreen> {
                         Container(
                           width: 350,
                           child: AutoSizeText(
-                            " Grettings! I am a FullStack Enginner with 3 years of experience working mostly in Web/app deve lopment, automation and Data Science. Throughout my career, I have had the opportunity to work on a variety of projects that have challenged me and allowed me to grow as a programmer.",
+                            " Grettings! I am a FullStack Enginner with 3 years of experience working mostly in Web/app development, automation and Data Science. Throughout my career, I have had the opportunity to work on a variety of projects that have challenged me and allowed me to grow as a programmer.",
                             style: GoogleFonts.poppins(
                                 color: Colors.grey,
                                 fontSize: ResponsiveWrapper.of(context)

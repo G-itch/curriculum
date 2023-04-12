@@ -171,7 +171,7 @@ class _SkillPageState extends State<SkillPage> {
                         Container(
                           width: 350,
                           child: AutoSizeText(
-                            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+                            " As a skilled programmer with a passion for cutting-edge technologies, my portfolio showcases my expertise in a diverse range of programming skills, including AWS, Python, JavaScript, Flutter, GCP, and Firebase.",
                             style: GoogleFonts.poppins(
                                 color: Colors.grey,
                                 fontSize: ResponsiveWrapper.of(context)
@@ -191,7 +191,7 @@ class _SkillPageState extends State<SkillPage> {
                         Container(
                           width: 350,
                           child: AutoSizeText(
-                            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante erat, pharetra in vehicula quis, tincidunt in sem. Phasellus nisi sem, ullamcorper tincidunt fringilla eu, dignissim vitae lacus. Donec fringilla libero ut neque consequat, ac aliquet tortor molestie.",
+                            " Leveraging my in-depth knowledge of AWS, Firebase, and GCP, I have built robust and scalable cloud-based solutions that optimize performance and enhance efficiency. My proficiency in Python, JavaScript, and Flutter allows me to create highly functional and user-friendly applications for various platforms.",
                             style: GoogleFonts.poppins(
                                 color: Colors.grey,
                                 fontSize: ResponsiveWrapper.of(context)
